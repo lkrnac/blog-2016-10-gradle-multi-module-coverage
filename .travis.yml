@@ -1,0 +1,11 @@
+env:
+  global:
+    - COVERALLS_REPO_TOKEN=
+
+language: java
+jdk:
+  - oraclejdk8
+
+install: echo "skip './gradlew assemble' step"
+
+script: ./gradlew build --continue
