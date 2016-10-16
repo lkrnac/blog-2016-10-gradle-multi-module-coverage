@@ -8,4 +8,4 @@ jdk:
 
 install: echo "skip './gradlew assemble' step"
 
-script: ./gradlew build --continue
+script: ./gradlew build coveralls --continue
