@@ -1,3 +1,8 @@
 jar {
     baseName = 'gradlecoverage'
 }
+
+dependencies {
+    compile project(':module1')
+    compile project(':module2')
+}

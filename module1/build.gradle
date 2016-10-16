@@ -1,0 +1,7 @@
+jar {
+    baseName = 'module1'
+}
+
+dependencies {
+    compile project(':moduleCommon')
+}
