@@ -1,6 +1,6 @@
 env:
   global:
-    - COVERALLS_REPO_TOKEN=
+    - COVERALLS_REPO_TOKEN=JQofR7TNqCMebvHgE8wHwF6rznjvEc0Fr
 
 language: java
 jdk:

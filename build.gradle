@@ -2,6 +2,9 @@ buildscript {
     repositories {
         mavenCentral()
     }
+    dependencies{
+        classpath("org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3")
+    }
 }
 
 subprojects {
@@ -17,6 +20,7 @@ subprojects {
 
     apply plugin: 'java'
     apply plugin: 'idea'
+    apply plugin: "jacoco"
 
     group = 'net.lkrnac.blog'
     version = '1.0-SNAPSHOT'
@@ -37,3 +41,38 @@ repositories {
 }
 
 apply plugin: 'java'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'jacoco'
+
+def publishedProjects = subprojects.findAll()
+
+//This JaCoCo coverage task for multi-module Gradle project was inspired by:
+//https://github.com/ben-manes/caffeine/blob/master/build.gradle
+task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+    description = 'Generates an aggregate report from all subprojects'
+
+    dependsOn(publishedProjects.test)
+
+    additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(publishedProjects.sourceSets.main.output)
+    executionData = files(publishedProjects.jacocoTestReport.executionData)
+
+    reports {
+        html.enabled = true // human readable
+        xml.enabled = true // required by coveralls
+    }
+
+    doFirst {
+        executionData = files(executionData.findAll { it.exists() })
+    }
+}
+
+coveralls {
+    sourceDirs = publishedProjects.sourceSets.main.allSource.srcDirs.flatten()
+    jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+}
+
+tasks.coveralls {
+    dependsOn jacocoRootReport
+}
