@@ -1,7 +1,7 @@
 package net.lkrnac.blog.gradlecoverage;
 
+import org.junit.Assert;
 import org.junit.Test;
-import org.testng.Assert;
 
 /**
  * Created by: Lubos Krnac
@@ -17,6 +17,6 @@ public class GradleCoverageApplicationTest {
         String result = application.performJobs("Jobs performed: ");
 
         // THEN
-        Assert.assertEquals(result, "Jobs performed: Module1, Common, Module2, Common");
+        Assert.assertEquals("Jobs performed: Module1, Common, Module2, Common", result);
     }
 }

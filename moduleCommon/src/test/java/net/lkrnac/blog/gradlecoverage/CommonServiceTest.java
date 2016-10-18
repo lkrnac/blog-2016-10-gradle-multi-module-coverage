@@ -1,7 +1,7 @@
 package net.lkrnac.blog.gradlecoverage;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Created by: Lubos Krnac
@@ -17,6 +17,6 @@ public class CommonServiceTest {
         String result = commonService.performCommonJob("Jobs performed: ");
 
         // THEN
-        Assert.assertEquals(result, "Jobs performed: Common");
+        Assert.assertEquals("Jobs performed: Common", result);
     }
 }

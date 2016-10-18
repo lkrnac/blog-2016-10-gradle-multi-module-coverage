@@ -1,7 +1,7 @@
 package net.lkrnac.blog.gradlecoverage;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Created by: Lubos Krnac
@@ -17,6 +17,6 @@ public class Module2ServiceTest {
         String result = module2Service.performModule2Job("Jobs performed: ");
 
         // THEN
-        Assert.assertEquals(result, "Jobs performed: Module2, Common");
+        Assert.assertEquals("Jobs performed: Module2, Common", result);
     }
 }
