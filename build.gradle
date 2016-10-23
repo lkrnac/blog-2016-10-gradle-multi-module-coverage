@@ -1,10 +1,10 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies{
-        classpath("org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3")
-    }
+plugins {
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+}
+
+repositories {
+    mavenCentral()
 }
 
 subprojects {
@@ -14,7 +14,7 @@ subprojects {
 
     apply plugin: 'java'
     apply plugin: 'idea'
-    apply plugin: "jacoco"
+    apply plugin: 'jacoco'
 
     group = 'net.lkrnac.blog'
     version = '1.0-SNAPSHOT'
@@ -30,13 +30,6 @@ subprojects {
 task wrapper(type: Wrapper) {
     gradleVersion = '3.1'
 }
-repositories {
-    mavenCentral()
-}
-
-apply plugin: 'java'
-apply plugin: 'com.github.kt3k.coveralls'
-apply plugin: 'jacoco'
 
 def publishedProjects = subprojects.findAll()
 
